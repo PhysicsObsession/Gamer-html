@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamer.html - A hub for every gamer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.black-theme {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        body.black-theme .header {
+            background-color: #1a1a1a;
+            border-bottom-color: #333333;
+        }
+
+        body.black-theme .nav-pane {
+            background-color: #0d0d0d;
+            border-right-color: #333333;
+        }
+
+        body.black-theme .nav-pane h2 {
+            border-bottom-color: #333333;
+        }
+
+        body.black-theme .nav-pane a {
+            color: #cccccc;
+        }
+
+        body.black-theme .nav-pane a:hover {
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+
+        body.black-theme .info-pane,
+        body.black-theme .game-container {
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+        }
+
+        body.black-theme .info-pane h2,
+        body.black-theme .info-pane h3,
+        body.black-theme .info-pane h4,
+        body.black-theme .game-title {
+            color: #ffffff;
+            border-bottom-color: #333333;
+        }
+
+        body.black-theme .info-pane hr,
+        body.black-theme .game-container hr {
+            background-color: #333333;
+        }
+
+        body.black-theme input,
+        body.black-theme textarea,
+        body.black-theme select {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            border-color: #333333;
+        }
+
+        body.black-theme input:focus,
+        body.black-theme textarea:focus,
+        body.black-theme select:focus {
+            border-color: #555555;
+            background-color: #222222;
+        }
+
+        body.black-theme button {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        body.black-theme button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        body.white-theme .header {
+            background-color: #f5f5f5;
+            border-bottom-color: #e0e0e0;
+        }
+
+        body.white-theme .nav-pane {
+            background-color: #ffffff;
+            border-right-color: #e0e0e0;
+        }
+
+        body.white-theme .nav-pane h2 {
+            color: #000000;
+            border-bottom-color: #e0e0e0;
+        }
+
+        body.white-theme .nav-pane a {
+            color: #333333;
+        }
+
+        body.white-theme .nav-pane a:hover {
+            background-color: #f0f0f0;
+            color: #000000;
+        }
+
+        body.white-theme .info-pane,
+        body.white-theme .game-container {
+            background-color: #fafafa;
+            color: #333333;
+        }
+
+        body.white-theme .info-pane h2,
+        body.white-theme .info-pane h3,
+        body.white-theme .info-pane h4,
+        body.white-theme .game-title {
+            color: #000000;
+            border-bottom-color: #e0e0e0;
+        }
+
+        body.white-theme .info-pane hr,
+        body.white-theme .game-container hr {
+            background-color: #e0e0e0;
+        }
+
+        body.white-theme input,
+        body.white-theme textarea,
+        body.white-theme select {
+            background-color: #ffffff;
+            color: #000000;
+            border-color: #e0e0e0;
+        }
+
+        body.white-theme input:focus,
+        body.white-theme textarea:focus,
+        body.white-theme select:focus {
+            border-color: #999999;
+            background-color: #f9f9f9;
+        }
+
+        body.white-theme button {
+            background-color: rgba(0, 0, 0, 0.1);
+            border-color: rgba(0, 0, 0, 0.2);
+            color: #000000;
+        }
+
+        body.white-theme button:hover {
+            background-color: rgba(0, 0, 0, 0.15);
+        }
+
+        .header {
+            padding: 15px 20px;
+            border-bottom: 2px solid;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex: 1;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .theme-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .theme-btn {
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-pane {
+            padding: 20px;
+            border-right: 2px solid;
+            overflow-y: auto;
+            height: calc(100vh - 95px);
+            min-width: 200px;
+        }
+
+        .nav-pane h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid;
+            padding-bottom: 10px;
+        }
+
+        .nav-pane hr {
+            border: none;
+            height: 1px;
+            margin: 12px 0;
+        }
+
+        .nav-pane a {
+            display: block;
+            text-decoration: none;
+            padding: 12px 10px;
+            margin: 5px 0;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .nav-pane a:hover {
+            padding-left: 15px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .info-pane {
+            padding: 30px;
+            overflow-y: auto;
+            height: calc(100vh - 95px);
+            flex: 1;
+        }
+
+        .info-pane h2 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            border-bottom: 3px solid;
+            padding-bottom: 12px;
+        }
+
+        .info-pane h3 {
+            font-size: 20px;
+            margin: 20px 0 10px 0;
+            margin-top: 25px;
+        }
+
+        .info-pane h4 {
+            font-size: 16px;
+            margin: 15px 0 8px 0;
+            margin-top: 20px;
+        }
+
+        .info-pane p {
+            line-height: 1.6;
+            margin: 10px 0;
+            font-size: 15px;
+        }
+
+        .info-pane ol, .info-pane ul {
+            margin-left: 20px;
+            margin: 15px 0 15px 20px;
+        }
+
+        .info-pane li {
+            margin: 8px 0;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .info-pane hr {
+            border: none;
+            height: 1px;
+            margin: 20px 0;
+        }
+
+        .game-container {
+            padding: 30px;
+        }
+
+        .game-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            border-bottom: 3px solid;
+            padding-bottom: 10px;
+        }
+
+        .back-button {
+            display: inline-block;
+            text-decoration: none;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: inherit;
+        }
+
+        .back-button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .main-container {
+            display: flex;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .content-row {
+            display: flex;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .nav-column {
+            flex: 0 0 20%;
+            border-right: 2px solid;
+            overflow-y: auto;
+        }
+
+        .content-column {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        iframe {
+            border: 1px solid;
+            border-radius: 6px;
+            margin: 20px 0;
+            max-width: 100%;
+        }
+
+        body.black-theme iframe {
+            border-color: #333333;
+        }
+
+        body.white-theme iframe {
+            border-color: #e0e0e0;
+        }
+
+        input, textarea, select {
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: 1px solid;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+        }
+
+        button {
+            color: inherit;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: 1px solid;
+        }
+
+        button:hover {
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+        }
+
+        body.black-theme ::-webkit-scrollbar-thumb {
+            background-color: #333333;
+        }
+
+        body.black-theme ::-webkit-scrollbar-thumb:hover {
+            background-color: #555555;
+        }
+
+        body.white-theme ::-webkit-scrollbar-thumb {
+            background-color: #cccccc;
+        }
+
+        body.white-theme ::-webkit-scrollbar-thumb:hover {
+            background-color: #999999;
+        }
+
+        .welcome-pane {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(20,20,20,0.95) 100%);
+        }
+
+        body.white-theme .welcome-pane {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(240,240,240,0.95) 100%);
+        }
+
+        .welcome-content {
+            text-align: center;
+            padding: 40px;
+            max-width: 600px;
+        }
+
+        .welcome-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .welcome-content h2 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+
+        .welcome-content p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            opacity: 0.7;
+        }
+
+        .welcome-content ol {
+            text-align: left;
+            display: inline-block;
+            margin: 30px 0;
+            font-size: 16px;
+        }
+
+        .welcome-content li {
+            margin: 12px 0;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+
+        .welcome-btn {
+            background-color: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 40px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+        }
+
+        body.white-theme .welcome-btn {
+            background-color: rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(0, 0, 0, 0.2);
+            color: #000000;
+        }
+
+        .welcome-btn:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        body.white-theme .welcome-btn:hover {
+            background-color: rgba(0, 0, 0, 0.15);
+            border-color: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .welcome-pane.hidden {
+            display: none;
+        }
+
+        .page-content {
+            display: none;
+        }
+
+        .page-content.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .content-row {
+                flex-direction: column;
+            }
+
+            .nav-column {
+                flex: 0 0 auto;
+                max-height: 200px;
+                border-right: none;
+                border-bottom: 2px solid;
+                overflow-x: auto;
+                overflow-y: hidden;
+            }
+
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .welcome-content h1 {
+                font-size: 32px;
+            }
+
+            .welcome-content h2 {
+                font-size: 20px;
+            }
+
+            .info-pane, .game-container {
+                padding: 20px;
+            }
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body class="black-theme">
+    <div class="main-container">
+        <div class="welcome-pane" id="welcomePane">
+            <div class="welcome-content">
+                <h1><i class="fas fa-gamepad"></i> Gamer.html</h1>
+                <h2>A Hub for Every Gamer</h2>
+                <p>Welcome! Get ready to explore an amazing collection of games and entertainment.</p>
+                <ol>
+                    <li>Select a game category from the 'Navigation Pane' on the left</li>
+                    <li>Explore games and select the one you want to play</li>
+                    <li>Read the instructions and enjoy your gaming experience</li>
+                </ol>
+                <button class="welcome-btn" onclick="closeWelcome()">Let's Play!</button>
+            </div>
+        </div>
+
+        <div class="header">
+            <div class="header-left">
+                <h1><i class="fas fa-gamepad"></i> Gamer.html</h1>
+            </div>
+            <div class="theme-switcher">
+                <button class="theme-btn" onclick="switchTheme('black-theme')"><i class="fas fa-moon"></i> Dark</button>
+                <button class="theme-btn" onclick="switchTheme('white-theme')"><i class="fas fa-sun"></i> Light</button>
+            </div>
+        </div>
+
+        <div class="content-row">
+            <div class="nav-column">
+                <div class="nav-pane">
+                    <h2>Navigation Pane</h2>
+                    <hr>
+                    <a onclick="showPage('home')"><i class="fas fa-home"></i> Home</a>
+                    <hr>
+                    <a onclick="showPage('clicking-games')"><i class="fas fa-mouse"></i> Clicking Games</a>
+                    <hr>
+                    <a onclick="showPage('mini-games')"><i class="fas fa-dice"></i> Mini Games</a>
+                    <hr>
+                    <a onclick="showPage('quiz-games')"><i class="fas fa-question-circle"></i> Quiz Games</a>
+                    <hr>
+                    <a onclick="showPage('recreations')"><i class="fas fa-bullseye"></i> Recreations</a>
+                    <hr>
+                    <a onclick="showPage('geometry-dash')"><i class="fas fa-arrow-up"></i> Geometry Dash Games</a>
+                    <hr>
+                    <a onclick="showPage('simulations')"><i class="fas fa-flask"></i> Simulations</a>
+                    <hr>
+                    <a onclick="showPage('tools')"><i class="fas fa-wrench"></i> Tools</a>
+                    <hr>
+                    <a onclick="showPage('ai')"><i class="fas fa-robot"></i> AI</a>
+                    <hr>
+                    <a onclick="showPage('more-games')"><i class="fas fa-plus"></i> More Games</a>
+                    <hr>
+                    <a onclick="showPage('support')"><i class="fas fa-headset"></i> Support and Info</a>
+                    <hr>
+                    <a onclick="showPage('contact')"><i class="fas fa-envelope"></i> Contact</a>
+                    <hr>
+                </div>
+            </div>
+
+            <div class="content-column">
+                <div id="home" class="page-content active info-pane">
+                    <h2>Welcome to Gamer.html</h2>
+                    <h3>A hub for every gamer</h3>
+                    <h4>Information</h4>
+                    <p>Gamer.html is a html program made for gamers and by gamers. It is a program used to play and upload games which can be all be played in one place. It is not a spyware or counterfiet website like others in the space.</p>
+                    <h4>Navigation</h4>
+                    <ol>
+                        <li>Click on a genre of game that you want to play from the 'Navigation Pane' present towards the left of the screen.</li>
+                        <li>In the navigation pane, images and titles of games will appear from which you can select the game of your choice.</li>
+                        <li>After choosing the game the game will open with the needed information on controls present in this window.</li>
+                    </ol>
+                </div>
+
+                <div id="clicking-games" class="page-content game-container">
+                    <h2 class="game-title"><i class="fas fa-mouse"></i> Clicking Games</h2>
+                    <button onclick="showPage('home')" class="back-button"><i class="fas fa-arrow-left"></i> Back to Home</button>
+                    <hr>
+                    <a href="YOUR GAME" target="_blank" style="display: inline-block; padding: 10px 20px; background: rgba(255,255,255,0.1); border-radius: 5px; text-decoration: none; margin: 10px 0;">Game 1</a>
+                </div>
+
+                <div id="mini-games" class="page-content game-container">
+                    <h2 class="game-title"><i class="fas fa-dice"></i> Mini Games</h2>
+                    <button onclick="showPage('home')" class="back-button"><i class="fas fa-arrow-left"></i> Back to Home</button>
+                    <hr>
+                    <h4>Popper Game</h4>
+                    <p>Click the balloons to get points!</p>
+                    <iframe src="https://scratch.mit.edu/projects/773430682/embed" allowtransparency="true" width="100%" height="603" frameborder="0" scrolling="no" allowfullscreen></iframe>
+                    <hr>
+                    <h4>WAM Game</h4>
+                    <p>Whack-a-mole style game. Try to hit the targets as fast as you can!</p>
+                    <a href="YOUR GAME" target="_blank" style="display: inline-block; padding: 10px 20px; background: rgba(255,255,255,0.1); border-radius: 5px; text-decoration: none; margin: 10px 0;">Play WAM</a>
+                </div>
+
+                <div id="quiz-games" class="page-content game-container">
+                    <h2 class="game-title"><i class="fas fa-question-circle"></i> Quiz Games</h2>
+                    <button onclick="showPage('home')" class="back-button"><i class="fas fa-arrow-left"></i> Back to Home</button>
+                    <hr>
+                    <a href="YOUR GAME" target="_blank" style="display: inline-block; padding: 10px 20px; background: rgba(255,255,255,0.1); border-radius: 5px; text-decoration: none; margin: 10px 0;">Quiz Game</a>
+                </div>
+
+                <div id="recreations" class="page-content game-container">
+                    <h2 class="game-title"><i class="fas fa-bullseye"></i> Recreations</h2>
+                    <button onclick="showPage('home')" class="back-button"><i class="fas fa-arrow-left"></i> Back to Home</button>
+                    <hr>
+                    <a href="YOUR GAME" target="_blank" style="display: inline-block; padding: 10px 20px; background: rgba(255,255,255,0.1); border-radius: 5px; text-decoration: none; margin: 10px 0;">Recreation Game</a>
+                </div>
+
+                <div id="geometry-dash" class="page-content game-container">
+                    <h2 class="game-title"><i class="fas fa-arrow-up"></i> Geometry Dash Games</h2>
+                    <button onclick="showPage('home')" class="back-button"><i class="fas fa-arrow-left"></i> Back to Home</button>
+                    <hr>
+                    <a href="YOUR GAME" target="_blank" style="display: inline-block; padding: 10px 20px; background: rgba(255,255,255,0.1); border-radius: 5px; text-decoration: none; margin: 10px 0;">Geometry Dash Game</a>
+                </div>
+
+                <div id="simulations" class="page-content game-container">
+                    <h2 class="game-title"><i class="fas fa-flask"></i> Simulations</h2>
+                    <button onclick="showPage('home')" class="back-button"><i class="fas fa-arrow-left"></i> Back to Home</button>
+                    <hr>
+                    <a href="YOUR GAME" target="_blank" style="display: inline-block; padding: 10px 20px; background: rgba(255,255,255,0.1); border-radius: 5px; text-decoration: none; margin: 10px 0;">Simulation</a>
+                </div>
+
+                <div id="tools" class="page-content game-container">
+                    <h2 class="game-title"><i class="fas fa-wrench"></i> Tools</h2>
+                    <button onclick="showPage('home')" class="back-button"><i class="fas fa-arrow-left"></i> Back to Home</button>
+                    <hr>
+                    <a href="YOUR GAME" target="_blank" style="display: inline-block; padding: 10px 20px; background: rgba(255,255,255,0.1); border-radius: 5px; text-decoration: none; margin: 10px 0;">Tool</a>
+                </div>
+
+                <div id="ai" class="page-content game-container">
+                    <h2 class="game-title"><i class="fas fa-robot"></i> AI Games</h2>
+                    <button onclick="showPage('home')" class="back-button"><i class="fas fa-arrow-left"></i> Back to Home</button>
+                    <hr>
+                    <a href="YOUR GAME" target="_blank" style="display: inline-block; padding: 10px 20px; background: rgba(255,255,255,0.1); border-radius: 5px; text-decoration: none; margin: 10px 0;">AI Game</a>
+                </div>
+
+                <div id="more-games" class="page-content game-container">
+                    <h2 class="game-title"><i class="fas fa-plus"></i> More Games</h2>
+                    <button onclick="showPage('home')" class="back-button"><i class="fas fa-arrow-left"></i> Back to Home</button>
+                    <hr>
+                    <a href="YOUR GAME" target="_blank" style="display: inline-block; padding: 10px 20px; background: rgba(255,255,255,0.1); border-radius: 5px; text-decoration: none; margin: 10px 0;">More Game</a>
+                </div>
+
+                <div id="support" class="page-content info-pane">
+                    <h2><i class="fas fa-headset"></i> Support and Info</h2>
+                    <h4>How to Use Gamer.html</h4>
+                    <p>Gamer.html is designed to be intuitive and user-friendly. Simply navigate through the menu on the left to find your favorite games. Each game has its own instructions and controls listed on its page.</p>
+                    <h4>System Requirements</h4>
+                    <ul>
+                        <li>Modern web browser (Chrome, Firefox, Safari, Edge)</li>
+                        <li>Stable internet connection</li>
+                        <li>JavaScript enabled</li>
+                    </ul>
+                    <h4>Troubleshooting</h4>
+                    <p>If you experience any issues, try refreshing the page or clearing your browser cache. For persistent problems, please contact our support team.</p>
+                </div>
+
+                <div id="contact" class="page-content info-pane">
+                    <h2><i class="fas fa-envelope"></i> Contact Us</h2>
+                    <h4>Get in Touch</h4>
+                    <p>We'd love to hear from you! Whether you have feedback, suggestions, or questions, feel free to reach out.</p>
+                    <form class="mt-20" onsubmit="submitForm(event)">
+                        <label for="name">Name:</label><br>
+                        <input type="text" id="name" name="name" placeholder="Your Name" style="width: 100%; max-width: 300px; margin: 10px 0;" required><br><br>
+                        
+                        <label for="email">Email:</label><br>
+                        <input type="email" id="email" name="email" placeholder="Your Email" style="width: 100%; max-width: 300px; margin: 10px 0;" required><br><br>
+                        
+                        <label for="message">Message:</label><br>
+                        <textarea id="message" name="message" rows="5" placeholder="Your Message" style="width: 100%; max-width: 300px; margin: 10px 0;" required></textarea><br><br>
+                        
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('gameTheme') || 'black-theme';
+            document.body.className = savedTheme;
+        }
+
+        function switchTheme(theme) {
+            document.body.className = theme;
+            localStorage.setItem('gameTheme', theme);
+        }
+
+        function closeWelcome() {
+            const welcomePane = document.getElementById('welcomePane');
+            welcomePane.classList.add('hidden');
+            localStorage.setItem('welcomeShown', 'true');
+            showPage('home');
+        }
+
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            const selectedPage = document.getElementById(pageId);
+            if (selectedPage) {
+                selectedPage.classList.add('active');
+                selectedPage.scrollTop = 0;
+            }
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            if (name && email && message) {
+                alert(`Thank you for your message, ${name}! We will get back to you at ${email} soon.`);
+                document.querySelector('form').reset();
+                showPage('home');
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                showPage('home');
+            }
+        });
+
+        window.addEventListener('load', function() {
+            initializeTheme();
+            if (!localStorage.getItem('welcomeShown')) {
+                document.getElementById('welcomePane').classList.remove('hidden');
+            } else {
+                document.getElementById('welcomePane').classList.add('hidden');
+                showPage('home');
+            }
+        });
+    </script>
+</body>
+</html>
